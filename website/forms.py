@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User 
 from django import forms
+from models import Record
 
 
 class SignUpForm(UserCreationForm):
@@ -8,6 +9,7 @@ class SignUpForm(UserCreationForm):
     first_name=forms.CharField(label="",max_length=200,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}))
     last_name=forms.CharField(label="",max_length=200,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Last Name'}))
 
+    class Meta:
         model=User
         fields=('username','first_name','last_name','password1','password2')
     
@@ -31,4 +33,19 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'	
 
 
+class AddREcordForm(forms.ModelForm):
+        first_name=forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'firstname'}),label="")
+        last_name=forms.CharField(required=True,widget=forms.TextInput(attrs={ 'class':'form-control','placeholder':'lastname'}),label="")
+        email=forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}),label="")
+        phone=forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'phone'}),label="")
+        address=forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'address'}),label="")
+        city=forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'city'}),label="")
+        state=forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'fprm-control','placeholder':'state'}),label="")
+        zipcode=forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'fprm-control','placeholder':'zipcode'}),label="")
+
+        class Meta:
+             model=Record
+             exclude=("user",)
+                    
+        
 
